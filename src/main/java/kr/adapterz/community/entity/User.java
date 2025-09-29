@@ -15,9 +15,10 @@ public class User {
 
     @Column(unique = true, nullable = false, length = 10)
     private String nickname;
-    @Column(nullable = true, length = 320)
+    @Column(length = 320)
     private String profileImage;
 
+    @Column(nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
