@@ -28,6 +28,5 @@ public class User {
         this.nickname = nickname;
         this.profileImage = profileImage;
         this.createdAt = LocalDateTime.now();
-        this.modifiedAt = null;
     }
 }
