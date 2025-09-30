@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class UserAuth {
     @Id
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
