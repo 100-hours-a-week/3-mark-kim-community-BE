@@ -2,9 +2,7 @@ package kr.adapterz.community.service;
 
 import kr.adapterz.community.dto.UserSignUpRequestDto;
 import kr.adapterz.community.dto.UserSignUpResponseDto;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface UserService {
     /*
         회원가입 요청 시 호출
