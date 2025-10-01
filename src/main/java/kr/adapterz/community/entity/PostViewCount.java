@@ -16,7 +16,7 @@ public class PostViewCount {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
-    @Column(name = "view_count")
+    @Column(name = "view_count", nullable = false)
     private Long viewCount;
 
     protected PostViewCount() {}
