@@ -30,4 +30,13 @@ public class Post {
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
+
+    protected Post() {}
+
+    public Post(String title, String content, User user) {
+        this.title = title;
+        this.content = content;
+        this.createdAt = LocalDateTime.now();
+        this.user = user;
+    }
 }
