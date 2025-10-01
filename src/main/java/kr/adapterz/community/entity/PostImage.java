@@ -25,4 +25,12 @@ public class PostImage {
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
+
+    protected PostImage() {}
+
+    public PostImage(String imagePath, Post post) {
+        this.imagePath = imagePath;
+        this.createdAt = LocalDateTime.now();
+        this.post = post;
+    }
 }
