@@ -10,8 +10,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter @Setter
 public class PostLikeAndCommentCount {
 
-    @Id
     @OneToOne()
+    @MapsId()
     @JoinColumn(name = "post_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
