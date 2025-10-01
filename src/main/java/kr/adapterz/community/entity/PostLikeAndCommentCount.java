@@ -1,15 +1,12 @@
 package kr.adapterz.community.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-@Entity(name = "post_like_comment_count")
+@Entity(name = "posts_like_comment_count")
 @Getter @Setter
 public class PostLikeAndCommentCount {
 
@@ -19,10 +16,10 @@ public class PostLikeAndCommentCount {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
-    @JoinColumn(name = "like_count", nullable = false)
+    @Column(name = "like_count", nullable = false)
     private Integer likeCount;
 
-    @JoinColumn(name = "comment_count", nullable = false)
+    @Column(name = "comment_count", nullable = false)
     private Integer commentCount;
 
     protected PostLikeAndCommentCount() {}
