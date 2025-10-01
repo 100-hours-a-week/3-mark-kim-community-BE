@@ -36,7 +36,7 @@ public class Comment {
 
     protected Comment() {}
 
-    public  Comment(String content, Post post, User user) {
+    public Comment(String content, Post post, User user) {
         this.content = content;
         this.createdAt = LocalDateTime.now();
         this.post = post;
