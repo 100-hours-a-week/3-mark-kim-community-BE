@@ -10,6 +10,10 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter @Setter
 public class PostLikeAndCommentCount {
 
+    @Id
+    @Column(name = "post_id")
+    private Long postId;
+
     @OneToOne()
     @MapsId()
     @JoinColumn(name = "post_id")

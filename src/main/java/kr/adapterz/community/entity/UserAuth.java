@@ -10,6 +10,10 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter @Setter
 public class UserAuth {
 
+    @Id
+    @Column(name = "user_id")
+    private Long userId;
+
     @OneToOne()
     @MapsId()
     @JoinColumn(name = "user_id")
