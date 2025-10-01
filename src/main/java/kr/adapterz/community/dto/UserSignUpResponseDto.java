@@ -11,4 +11,11 @@ public class UserSignUpResponseDto {
     private String email;
     private String nickname;
     private LocalDateTime createdAt;
+
+    public UserSignUpResponseDto(Long userId, String email, String nickname, LocalDateTime createdAt) {
+        this.userId = userId;
+        this.email = email;
+        this.nickname = nickname;
+        this.createdAt = createdAt;
+    }
 }
