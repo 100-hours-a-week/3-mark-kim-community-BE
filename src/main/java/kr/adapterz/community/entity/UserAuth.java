@@ -19,4 +19,12 @@ public class UserAuth {
     private String email;
     @Column(length = 100, nullable = false)
     private String password;
+
+    protected UserAuth() {}
+
+    public UserAuth(User user, String email, String password) {
+        this.user = user;
+        this.email = email;
+        this.password = password;
+    }
 }
