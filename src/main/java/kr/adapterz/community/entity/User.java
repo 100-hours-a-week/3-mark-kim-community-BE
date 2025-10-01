@@ -15,6 +15,7 @@ public class User {
 
     @Column(unique = true, nullable = false, length = 10)
     private String nickname;
+
     @Column(length = 320)
     private String profileImage;
 

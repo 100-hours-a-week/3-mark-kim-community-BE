@@ -9,8 +9,13 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity(name = "users_auth")
 @Getter @Setter
 public class UserAuth {
+
     @Id
+    @Column(name = "user_id")
+    private Long userId;
+
     @OneToOne()
+    @MapsId()
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;

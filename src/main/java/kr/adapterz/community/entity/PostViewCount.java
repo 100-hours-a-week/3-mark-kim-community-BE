@@ -11,7 +11,11 @@ import org.hibernate.annotations.OnDeleteAction;
 public class PostViewCount {
 
     @Id
+    @Column(name = "post_id")
+    private Long postId;
+
     @OneToOne()
+    @MapsId()
     @JoinColumn(name = "post_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
