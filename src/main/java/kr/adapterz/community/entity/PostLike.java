@@ -28,4 +28,12 @@ public class PostLike {
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
+
+    protected PostLike() {}
+
+    public PostLike(Post post, User user) {
+        this.createdAt = LocalDateTime.now();
+        this.post = post;
+        this.user = user;
+    }
 }
