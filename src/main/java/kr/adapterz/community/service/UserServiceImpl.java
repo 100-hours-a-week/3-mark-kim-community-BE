@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public UserSignUpResponseDto saveUser(UserSignUpRequestDto userSignUpRequestDto) {
         // User 엔티티 생성 및 영속화
         User user = new User(
-                userSignUpRequestDto.getEmail(),
+                userSignUpRequestDto.getNickname(),
                 userSignUpRequestDto.getProfileImage()
                 );
         User savedUser = userRepository.save(user);
