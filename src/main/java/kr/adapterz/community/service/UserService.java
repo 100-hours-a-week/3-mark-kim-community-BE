@@ -22,4 +22,11 @@ public interface UserService {
         수정된 회원정보(닉네임, 프로필 사진, 수정 시각)를 반환
      */
     UserInfoUpdateResponseDto updateUserInfo(UserInfoUpdateRequestDto userInfoUpdateRequestDto);
+
+    /*
+        비밀번호 수정 시 호출
+        해당 세션의 유저의 비밀번호를 수정
+        수정 시각을 반환
+     */
+    UserPwdUpdateResponseDto updateUserPwd(UserPwdUpdateRequestDto userPwdUpdateRequestDto);
 }

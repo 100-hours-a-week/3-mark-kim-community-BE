@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -70,5 +72,20 @@ public class UserServiceImpl implements UserService {
 
         // 수정된 회원정보 반환
         return new UserInfoUpdateResponseDto(user.getNickname(), user.getProfileImage(), user.getModifiedAt());
+    }
+
+    @Transactional
+    public UserPwdUpdateResponseDto updateUserPwd(UserPwdUpdateRequestDto userPwdUpdateRequestDto) {
+
+        // 비밀번호 수정
+        UserAuth userAuth = userAuthRepository.findById(userPwdUpdateRequestDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("user not found"));
+        userAuth.setPassword(userPwdUpdateRequestDto.getPassword());
+
+        // 수정 시각 업데이트
+        User user = userAuth.getUser();
+        user.setModifiedAt(LocalDateTime.now());
+
+        // 수정된 시각 반환
+        return new UserPwdUpdateResponseDto(user.getModifiedAt());
     }
 }

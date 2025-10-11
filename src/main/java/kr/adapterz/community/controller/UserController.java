@@ -32,4 +32,9 @@ public class UserController {
     public UserInfoUpdateResponseDto patchUserInfo(@RequestBody UserInfoUpdateRequestDto userInfoUpdateRequestDto) {
         return userService.updateUserInfo(userInfoUpdateRequestDto);
     }
+
+    @PatchMapping("/password")
+    public UserPwdUpdateResponseDto patchUserPwd(@RequestBody UserPwdUpdateRequestDto userPwdUpdateRequestDto) {
+        return userService.updateUserPwd(userPwdUpdateRequestDto);
+    }
 }
