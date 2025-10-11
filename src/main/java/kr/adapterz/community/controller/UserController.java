@@ -24,17 +24,25 @@ public class UserController {
 
     // 회원정보 수정 시 필요한 기존 회원정보 요청을 처리하는 메서드
     @GetMapping
-    public UserInfoResponseDto getUserInfo(@RequestParam Long userId) {
+    public UserInfoResponseDto getUserInfo(@RequestParam Long userId) { // 세션 정보를 가져오게 되면 userId 파라미터 불필요
         return userService.getUserInfo(userId);
     }
 
+    // 회원정보 수정 작업을 처리하는 메서드
     @PatchMapping
     public UserInfoUpdateResponseDto patchUserInfo(@RequestBody UserInfoUpdateRequestDto userInfoUpdateRequestDto) {
         return userService.updateUserInfo(userInfoUpdateRequestDto);
     }
 
+    // 비밀번호 변경 작업을 처리하는 메서드
     @PatchMapping("/password")
     public UserPwdUpdateResponseDto patchUserPwd(@RequestBody UserPwdUpdateRequestDto userPwdUpdateRequestDto) {
         return userService.updateUserPwd(userPwdUpdateRequestDto);
+    }
+
+    // 회원 탈퇴 요청 작업을 처리하는 메서드
+    @DeleteMapping
+    public void deleteUser(@RequestParam Long userId) { // 세션 정보를 가져오게 되면 userId 파라미터 불필요
+        userService.deleteUser(userId);
     }
 }

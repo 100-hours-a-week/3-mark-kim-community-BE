@@ -88,4 +88,13 @@ public class UserServiceImpl implements UserService {
         // 수정된 시각 반환
         return new UserPwdUpdateResponseDto(user.getModifiedAt());
     }
+
+
+    // soft delete로 변경될 수도 있음
+    @Transactional
+    public void deleteUser(Long userId) { // 세션 정보를 가져오게 되면 userId 파라미터 불필요
+
+        // 해당 유저의 회원정보 삭제
+        userRepository.deleteById(userId);
+    }
 }

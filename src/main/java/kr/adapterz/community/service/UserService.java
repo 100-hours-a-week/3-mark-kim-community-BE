@@ -29,4 +29,11 @@ public interface UserService {
         수정 시각을 반환
      */
     UserPwdUpdateResponseDto updateUserPwd(UserPwdUpdateRequestDto userPwdUpdateRequestDto);
+
+    /*
+        회원 탈퇴 시 호출
+        해당 세션의 유저의 회원정보 삭제
+     */
+    // soft delete로 변경될 수도 있음
+    void deleteUser(Long userId); // 세션 정보를 가져오게 되면 userId 파라미터 불필요
 }
