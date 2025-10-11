@@ -8,7 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "post_images")
+@Entity
+@Table(name = "post_images")
 @Getter @Setter
 public class PostImage {
     @Id

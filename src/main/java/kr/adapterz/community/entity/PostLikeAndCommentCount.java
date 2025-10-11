@@ -6,7 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-@Entity(name = "posts_like_comment_count")
+@Entity
+@Table(name = "posts_like_comment_count")
 @Getter @Setter
 public class PostLikeAndCommentCount {
 

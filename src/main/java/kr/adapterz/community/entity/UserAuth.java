@@ -6,7 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-@Entity(name = "users_auth")
+@Entity
+@Table(name = "users_auth")
 @Getter @Setter
 public class UserAuth {
 

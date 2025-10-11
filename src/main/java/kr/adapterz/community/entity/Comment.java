@@ -8,7 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "comments")
+@Entity
+@Table(name = "comments")
 @Getter @Setter
 public class Comment {
 
