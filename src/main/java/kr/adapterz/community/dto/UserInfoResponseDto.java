@@ -10,4 +10,6 @@ public class UserInfoResponseDto {
     private String email;
     private String nickname;
     private String profileImage;
+
+    // 추후 data 필드로 분리
 }
