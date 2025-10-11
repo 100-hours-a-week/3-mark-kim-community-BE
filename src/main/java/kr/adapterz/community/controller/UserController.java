@@ -1,8 +1,6 @@
 package kr.adapterz.community.controller;
 
-import kr.adapterz.community.dto.UserInfoResponseDto;
-import kr.adapterz.community.dto.UserSignUpRequestDto;
-import kr.adapterz.community.dto.UserSignUpResponseDto;
+import kr.adapterz.community.dto.*;
 import kr.adapterz.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +24,12 @@ public class UserController {
 
     // 회원정보 수정 시 필요한 기존 회원정보 요청을 처리하는 메서드
     @GetMapping
-    public UserInfoResponseDto getUserInfo(@RequestParam Integer userId) {
+    public UserInfoResponseDto getUserInfo(@RequestParam Long userId) {
         return userService.getUserInfo(userId);
+    }
+
+    @PatchMapping
+    public UserInfoUpdateResponseDto patchUserInfo(@RequestBody UserInfoUpdateRequestDto userInfoUpdateRequestDto) {
+        return userService.updateUserInfo(userInfoUpdateRequestDto);
     }
 }

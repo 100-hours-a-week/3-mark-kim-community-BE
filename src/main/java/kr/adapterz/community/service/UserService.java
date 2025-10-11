@@ -1,8 +1,6 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.UserInfoResponseDto;
-import kr.adapterz.community.dto.UserSignUpRequestDto;
-import kr.adapterz.community.dto.UserSignUpResponseDto;
+import kr.adapterz.community.dto.*;
 
 public interface UserService {
     /*
@@ -16,5 +14,12 @@ public interface UserService {
         회원정보 수정 시 호출
         해당 세션의 유저의 회원정보(이메일, 닉네임, 프로필 사진)를 반환
     */
-    UserInfoResponseDto getUserInfo(Integer userId); // 세션 정보를 가져오게 되면 userId 파라미터 불필요
+    UserInfoResponseDto getUserInfo(Long userId); // 세션 정보를 가져오게 되면 userId 파라미터 불필요
+
+    /*
+        회원정보 수정 시 호출
+        해당 세션의 유저의 회원정보(닉네임, 프로필 사진)를 수정
+        수정된 회원정보(닉네임, 프로필 사진, 수정 시각)를 반환
+     */
+    UserInfoUpdateResponseDto updateUserInfo(UserInfoUpdateRequestDto userInfoUpdateRequestDto);
 }

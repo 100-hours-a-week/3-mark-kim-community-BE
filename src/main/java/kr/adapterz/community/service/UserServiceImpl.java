@@ -1,8 +1,8 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.UserInfoResponseDto;
-import kr.adapterz.community.dto.UserSignUpRequestDto;
-import kr.adapterz.community.dto.UserSignUpResponseDto;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import kr.adapterz.community.dto.*;
 import kr.adapterz.community.entity.User;
 import kr.adapterz.community.entity.UserAuth;
 import kr.adapterz.community.repository.UserAuthRepository;
@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @PersistenceContext
+    private EntityManager em;
 
     private final UserRepository userRepository;
     private final UserAuthRepository userAuthRepository;
@@ -49,8 +52,23 @@ public class UserServiceImpl implements UserService {
         );
     }
 
-    public UserInfoResponseDto getUserInfo(Integer userId) { // 세션 정보를 가져오게 되면 userId 파라미터 불필요
+    public UserInfoResponseDto getUserInfo(Long userId) { // 세션 정보를 가져오게 되면 userId 파라미터 불필요
 
-        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("user not found"));
+        return userRepository.findUserInfoById(userId).orElseThrow(() -> new IllegalArgumentException("user not found"));
+    }
+
+    @Transactional
+    public UserInfoUpdateResponseDto updateUserInfo(UserInfoUpdateRequestDto userInfoUpdateRequestDto) {
+
+        // 회원정보 수정
+        User user = userRepository.findById(userInfoUpdateRequestDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("user not found"));
+        user.setNickname(userInfoUpdateRequestDto.getNickname());
+        user.setProfileImage(userInfoUpdateRequestDto.getProfileImage());
+
+        // 변경사항 커밋
+        em.flush();
+
+        // 수정된 회원정보 반환
+        return new UserInfoUpdateResponseDto(user.getNickname(), user.getProfileImage(), user.getModifiedAt());
     }
 }
