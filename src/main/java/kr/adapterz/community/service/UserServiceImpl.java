@@ -1,5 +1,6 @@
 package kr.adapterz.community.service;
 
+import kr.adapterz.community.dto.UserInfoResponseDto;
 import kr.adapterz.community.dto.UserSignUpRequestDto;
 import kr.adapterz.community.dto.UserSignUpResponseDto;
 import kr.adapterz.community.entity.User;
@@ -46,5 +47,10 @@ public class UserServiceImpl implements UserService {
                 savedUser.getNickname(),
                 savedUser.getCreatedAt()
         );
+    }
+
+    public UserInfoResponseDto getUserInfo(Integer userId) { // 세션 정보를 가져오게 되면 userId 파라미터 불필요
+
+        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("user not found"));
     }
 }
