@@ -1,9 +1,8 @@
 package kr.adapterz.community.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Getter
 public class UserSignUpRequestDto {
     private String email;
     private String password;
