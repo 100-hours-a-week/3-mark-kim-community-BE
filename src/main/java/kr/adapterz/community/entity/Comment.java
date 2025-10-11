@@ -5,10 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "comments")
 @Getter @Setter
 public class Comment {
@@ -21,8 +25,12 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime modifiedAt;
 
     @ManyToOne()
@@ -39,7 +47,6 @@ public class Comment {
 
     public Comment(String content, Post post, User user) {
         this.content = content;
-        this.createdAt = LocalDateTime.now();
         this.post = post;
         this.user = user;
     }
