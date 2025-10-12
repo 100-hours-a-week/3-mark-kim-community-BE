@@ -1,5 +1,6 @@
 package kr.adapterz.community.service;
 
+import kr.adapterz.community.dto.PostListRetrieveResponseDto;
 import kr.adapterz.community.dto.PostUploadRequestDto;
 import kr.adapterz.community.dto.PostUploadResponseDto;
 
@@ -11,4 +12,10 @@ public interface PostService {
         생성된 엔티티를 DB에 저장하고 저장된 데이터 정보를 반환
     */
     PostUploadResponseDto savePost(PostUploadRequestDto postUploadRequestDto);
+
+    /*
+        게시글 목록 조회 시 호출
+        lastFetchId를 받아 해당 값보다 작은 id를 가진 게시글을 limit에 맞는 개수만큼 반환
+     */
+    PostListRetrieveResponseDto getPostList(Long lastFetchId, Integer limit);
 }
