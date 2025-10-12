@@ -47,4 +47,10 @@ public class PostController {
     ) {
         return postService.updatePost(postId, postUpdateRequestDto);
     }
+
+    // 게시글 삭제 작업을 처리하는 메서드
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable Long postId) {
+        postService.deletePost(postId);
+    }
 }

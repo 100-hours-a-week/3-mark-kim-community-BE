@@ -216,4 +216,10 @@ public class PostServiceImpl implements PostService {
                 )
         );
     }
+
+    @Transactional
+    public void deletePost(Long postId) {
+        // 해당 게시글 삭제
+        postRepository.deleteById(postId);
+    }
 }

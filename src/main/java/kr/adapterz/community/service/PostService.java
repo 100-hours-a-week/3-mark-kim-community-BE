@@ -29,4 +29,11 @@ public interface PostService {
         수정된 게시글 정보(title, content, images, modifiedAt)를 DTO에 매핑해서 반환
      */
     PostUpdateResponseDto updatePost(Long postId, PostUpdateRequestDto postUpdateRequestDto);
+
+    /*
+        게시글 삭제 시 호출
+        해당 게시글을 삭제
+        게시글에 포함된 댓글, 사진, 좋아요, 집계 데이터 삭제
+     */
+    void deletePost(Long postId);
 }
