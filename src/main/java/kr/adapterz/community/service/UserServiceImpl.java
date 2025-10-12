@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 
         // 비밀번호 수정
         UserAuth userAuth = userAuthRepository.findById(userPwdUpdateRequestDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("user not found"));
-        userAuth.setPassword(userPwdUpdateRequestDto.getPassword());
+        userAuth.setPassword(userPwdUpdateRequestDto.getPassword()); // Bcrypt 암호화 방법에 대해 학습하고 수정
 
         // 수정 시각 업데이트
         User user = userAuth.getUser();
