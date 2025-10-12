@@ -1,5 +1,6 @@
 package kr.adapterz.community.controller;
 
+import kr.adapterz.community.dto.PostDetailRetrieveResponseDto;
 import kr.adapterz.community.dto.PostListRetrieveResponseDto;
 import kr.adapterz.community.dto.PostUploadRequestDto;
 import kr.adapterz.community.dto.PostUploadResponseDto;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/posts")
 public class PostController {
 
-    private PostService postService;
+    private final PostService postService;
 
     @Autowired
     public PostController(PostService postService) {
@@ -30,5 +31,14 @@ public class PostController {
             @RequestParam(required = false) Long lastFetchId,
             @RequestParam Integer limit) {
         return postService.getPostList(lastFetchId, limit);
+    }
+
+    // 게시글 상세 조회 작업을 처리하는 메서드
+    @GetMapping("/{postId}")
+    public PostDetailRetrieveResponseDto retrievePostDetail(
+            @PathVariable("postId") Long postId,
+            @RequestParam(required = false) Long userId
+    ) {
+        return postService.getPostDetail(postId, userId);
     }
 }

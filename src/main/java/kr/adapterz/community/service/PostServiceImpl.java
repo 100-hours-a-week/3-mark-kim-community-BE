@@ -1,14 +1,15 @@
 package kr.adapterz.community.service;
 
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import kr.adapterz.community.dto.PostListRetrieveResponseDto;
-import kr.adapterz.community.dto.PostOneInListDto;
-import kr.adapterz.community.dto.PostUploadRequestDto;
-import kr.adapterz.community.dto.PostUploadResponseDto;
+import kr.adapterz.community.dto.*;
 import kr.adapterz.community.entity.*;
 import kr.adapterz.community.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,5 +105,79 @@ public class PostServiceImpl implements PostService {
                 .fetch();
 
         return new PostListRetrieveResponseDto(new PostListRetrieveResponseDto.Data(posts));
+    }
+
+    public PostDetailRetrieveResponseDto getPostDetail(Long postId, Long userId) {
+        // Q클래스
+        QPost post = QPost.post;
+        QUser user = QUser.user;
+        QPostImage postImage = QPostImage.postImage;
+        QPostLike postLike = QPostLike.postLike;
+        QPostLikeAndCommentCount postLikeAndCommentCount = QPostLikeAndCommentCount.postLikeAndCommentCount;
+        QPostViewCount postViewCount = QPostViewCount.postViewCount;
+
+        // 해당 게시글을 작성한 유저와 조회하는 유저가 동일한지 확인
+        Expression<Boolean> permission = new CaseBuilder()
+                .when(post.user.id.eq(userId))
+                .then(true)
+                .otherwise(false);
+
+        // 해당 게시글을 조회하는 유저의 좋아요 여부 확인
+        Expression<Boolean> liked = new CaseBuilder()
+                .when(
+                        JPAExpressions
+                                .selectOne()
+                                .from(postLike)
+                                .where(
+                                        postLike.post.id.eq(postId)
+                                                .and(postLike.user.id.eq(userId))
+                                )
+                                .exists()
+                )
+                .then(true)
+                .otherwise(false);
+
+        // 조인 후 조건에 맞는 게시글 상세 정보 조회 및 DTO 매핑
+        PostDetailRetrieveResponseDto.Data data = jpaQueryFactory
+                .select(Projections.constructor(
+                        PostDetailRetrieveResponseDto.Data.class,
+                        post.id,
+                        user.nickname,
+                        post.title,
+                        post.content,
+                        Expressions.constant(List.of()),
+                        postLikeAndCommentCount.likeCount.coalesce(0),
+                        postLikeAndCommentCount.commentCount.coalesce(0),
+                        postViewCount.viewCount.coalesce(0L),
+                        post.createdAt,
+                        post.modifiedAt,
+                        permission,
+                        permission,
+                        liked
+                ))
+                .from(post)
+                .leftJoin(post.user, user)
+                .leftJoin(postLikeAndCommentCount).on(postLikeAndCommentCount.postId.eq(post.id))
+                .leftJoin(postViewCount).on(postViewCount.postId.eq(post.id))
+                .leftJoin(postImage).on(postImage.post.eq(post))
+                .where(post.id.eq(postId))
+                .fetchOne();
+
+        // postId에 해당하는 게시글이 없을 경우 예외 처리
+        if (data == null) {
+            throw new IllegalArgumentException("post not found");
+        }
+
+        // 게시글에 포함된 이미지들 조회
+        List<String> images = jpaQueryFactory
+                .select(postImage.imagePath)
+                .from(postImage)
+                .where(postImage.post.id.eq(postId))
+                .fetch();
+
+        // DTO에 이미지 매핑
+        data.setImages(images);
+
+        return new PostDetailRetrieveResponseDto(data);
     }
 }
