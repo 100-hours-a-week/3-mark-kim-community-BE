@@ -1,9 +1,6 @@
 package kr.adapterz.community.controller;
 
-import kr.adapterz.community.dto.PostDetailRetrieveResponseDto;
-import kr.adapterz.community.dto.PostListRetrieveResponseDto;
-import kr.adapterz.community.dto.PostUploadRequestDto;
-import kr.adapterz.community.dto.PostUploadResponseDto;
+import kr.adapterz.community.dto.*;
 import kr.adapterz.community.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +37,14 @@ public class PostController {
             @RequestParam(required = false) Long userId
     ) {
         return postService.getPostDetail(postId, userId);
+    }
+
+    // 게시글 수정 작업을 처리하는 메서드
+    @PutMapping("/{postId}")
+    public PostUpdateResponseDto editPost(
+            @PathVariable("postId") Long postId,
+            @RequestBody PostUpdateRequestDto postUpdateRequestDto
+    ) {
+        return postService.updatePost(postId, postUpdateRequestDto);
     }
 }

@@ -180,4 +180,40 @@ public class PostServiceImpl implements PostService {
 
         return new PostDetailRetrieveResponseDto(data);
     }
+
+    @Transactional
+    public PostUpdateResponseDto updatePost(Long postId, PostUpdateRequestDto postUpdateRequestDto) {
+        // 해당 Post 조회
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("post not found"));
+
+        // title, content 수정
+        post.setTitle(postUpdateRequestDto.getTitle());
+        post.setContent(postUpdateRequestDto.getContent());
+
+        // 삭제할 PostImage 삭제
+        for (Long imageId : postUpdateRequestDto.getDeletedImages()) {
+            postImageRepository.deleteById(imageId);
+        }
+
+        // 추가할 PostImage 생성
+        for (String imagePath : postUpdateRequestDto.getAddedImages()) {
+            PostImage postImage = new PostImage(imagePath, post);
+            postImageRepository.save(postImage);
+        }
+
+        // 수정 후 해당 게시글의 이미지 목록 조회
+        List<String> images = postImageRepository.findImagesByPostId(postId).orElse(List.of());
+
+        // 변경 사항 커밋
+        em.flush();
+
+        return new PostUpdateResponseDto(
+                new PostUpdateResponseDto.Data(
+                        post.getTitle(),
+                        post.getContent(),
+                        images,
+                        post.getModifiedAt()
+                )
+        );
+    }
 }
