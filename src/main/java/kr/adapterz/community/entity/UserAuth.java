@@ -21,7 +21,7 @@ public class UserAuth {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @Column(length = 320, nullable = false)
+    @Column(length = 320, nullable = false,  unique = true)
     private String email;
     @Column(length = 100, nullable = false)
     private String password;
