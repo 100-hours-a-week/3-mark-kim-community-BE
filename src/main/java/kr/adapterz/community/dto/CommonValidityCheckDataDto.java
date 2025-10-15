@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @AllArgsConstructor
-public class CommonValidityCheckResponseDto {
-    private String message;
-    private CommonValidityCheckDataDto data;
+public class CommonValidityCheckDataDto {
+    private Boolean validity;
+    private Boolean isDuplicated;
 }

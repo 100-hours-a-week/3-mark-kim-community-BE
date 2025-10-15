@@ -1,6 +1,8 @@
 package kr.adapterz.community.controller;
 
+import jakarta.validation.Valid;
 import kr.adapterz.community.dto.ApiResponseDto;
+import kr.adapterz.community.dto.CommonValidityCheckDataDto;
 import kr.adapterz.community.dto.CommonValidityCheckResponseDto;
 import kr.adapterz.community.dto.EmailValidityCheckRequestDto;
 import kr.adapterz.community.service.ValidationService;
@@ -23,27 +25,16 @@ public class ValidationController {
 
     // 이메일 유효성 검증 작업을 처리하는 메서드
     @PostMapping("/email")
-    public ResponseEntity<ApiResponseDto<CommonValidityCheckResponseDto>> emailValidityCheck(
-            @RequestBody EmailValidityCheckRequestDto emailValidityCheckRequestDto) {
+    public ResponseEntity<ApiResponseDto<CommonValidityCheckDataDto>> emailValidityCheck(
+            @RequestBody @Valid EmailValidityCheckRequestDto emailValidityCheckRequestDto) {
 
         CommonValidityCheckResponseDto commonValidityCheckResponseDto =
                 validationService.emailValidityCheck(emailValidityCheckRequestDto.getEmail());
 
-        ApiResponseDto<CommonValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
-        String message;
-
-        if (!commonValidityCheckResponseDto.getValidity()) {
-            message = "Invalid email.";
-        }
-        else if (commonValidityCheckResponseDto.getIsDuplicated()) {
-            message = "Duplicated email.";
-        }
-        else {
-            message = "Email validity check passed.";
-        }
-
-        apiResponseDto.setMessage(message);
-        apiResponseDto.setData(commonValidityCheckResponseDto);
+        ApiResponseDto<CommonValidityCheckDataDto> apiResponseDto = new ApiResponseDto<>(
+                commonValidityCheckResponseDto.getMessage(),
+                commonValidityCheckResponseDto.getData()
+        );
 
         return ResponseEntity.ok(apiResponseDto);
     }
