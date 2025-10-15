@@ -31,6 +31,7 @@ public class ValidationController {
         ApiResponseDto<EmailValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
         apiResponseDto.setData(emailValidityCheckResponseDto);
 
+        // 유효성, 중복에 따라 메시지를 다르게 설정
         String message;
         if (!emailValidityCheckResponseDto.getValidity()) {
             message = "Invalid email format.";
@@ -42,6 +43,30 @@ public class ValidationController {
             message = "Email validity check passed.";
         }
 
+        apiResponseDto.setMessage(message);
+
+        return ResponseEntity.ok(apiResponseDto);
+    }
+
+    // 비밀번호 유효성 검증 작업을 처리하는 메서드
+    @PostMapping("/password")
+    public ResponseEntity<ApiResponseDto<PasswordValidityCheckResponseDto>> passwordValidityCheck(
+            @RequestBody @Valid PasswordValidityCheckRequestDto passwordValidityCheckRequestDto
+    ) {
+        PasswordValidityCheckResponseDto passwordValidityCheckResponseDto =
+                validationService.passwordValidityCheck(passwordValidityCheckRequestDto.getPassword());
+
+        ApiResponseDto<PasswordValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setData(passwordValidityCheckResponseDto);
+
+        // 유효성에 따라 메시지를 다르게 설정
+        String message;
+        if (!passwordValidityCheckResponseDto.getValidity()) {
+            message = "Invalid password.";
+        }
+        else {
+            message = "Password validity check passed.";
+        }
         apiResponseDto.setMessage(message);
 
         return ResponseEntity.ok(apiResponseDto);
