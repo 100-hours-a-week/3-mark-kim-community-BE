@@ -21,10 +21,9 @@ public class ValidationServiceImpl implements ValidationService {
 
     public CommonValidityCheckResponseDto emailValidityCheck(String email) {
 
-
         // 이메일 유효성 검증
         if (!EmailValidator.getInstance().isValid(email)) {
-            return new CommonValidityCheckResponseDto("Invalid email.", new CommonValidityCheckDataDto(false, false));
+            return new CommonValidityCheckResponseDto("Invalid email format.", new CommonValidityCheckDataDto(false, false));
         }
 
         // 해당 이메일에 대응하는 인증 정보를 조회
