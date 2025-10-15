@@ -25,6 +25,7 @@ public class AuthController {
         this.authService = authService;
     }
 
+    // 로그인 요청 작업을 처리하는 메서드
     @PostMapping
     public ResponseEntity<ApiResponseDto<LoginResponseDto>> login(@RequestBody LoginRequestDto loginRequestDto) {
 
