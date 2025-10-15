@@ -71,4 +71,32 @@ public class ValidationController {
 
         return ResponseEntity.ok(apiResponseDto);
     }
+
+    // 닉네임 유효성 검증 작업을 처리하는 메서드
+    @PostMapping("/nickname")
+    public ResponseEntity<ApiResponseDto<NicknameValidityCheckResponseDto>> nicknameValidityCheck(
+            @RequestBody @Valid NicknameValidityCheckRequestDto nicknameValidityCheckRequestDto
+    ) {
+        NicknameValidityCheckResponseDto nicknameValidityCheckResponseDto =
+                validationService.nicknameValidityCheck(nicknameValidityCheckRequestDto.getNickname());
+
+        ApiResponseDto<NicknameValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setData(nicknameValidityCheckResponseDto);
+
+        // 유효성에 따라 메시지를 다르게 설정
+        String message;
+        if (nicknameValidityCheckResponseDto.getHasSpace() ||
+        nicknameValidityCheckResponseDto.getOverLimit()) {
+            message = "Invalid nickname format.";
+        }
+        else if (nicknameValidityCheckResponseDto.getIsDuplicated()) {
+            message = "Duplicated nickname.";
+        }
+        else {
+            message = "Nickname validity check passed.";
+        }
+        apiResponseDto.setMessage(message);
+
+        return ResponseEntity.ok(apiResponseDto);
+    }
 }

@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "from User u join UserAuth ua on u = ua.user " +
             "where u.id = :userId")
     Optional<UserInfoResponseDto> findUserInfoById(Long userId);
+
+    Boolean existsByNickname(String nickname);
 }

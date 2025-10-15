@@ -1,6 +1,7 @@
 package kr.adapterz.community.service;
 
 import kr.adapterz.community.dto.EmailValidityCheckResponseDto;
+import kr.adapterz.community.dto.NicknameValidityCheckResponseDto;
 import kr.adapterz.community.dto.PasswordValidityCheckResponseDto;
 
 public interface ValidationService {
@@ -17,4 +18,11 @@ public interface ValidationService {
         유효성을 DTO에 매핑해 반환
      */
     PasswordValidityCheckResponseDto passwordValidityCheck(String password);
+
+    /*
+        닉네임 유효성 검증 시 호출
+        닉네임의 중복, 형식 등을 확인
+        띄워쓰기 포함 여부, 글자 수 초과 여부, 중복 여부를 DTO에 매핑해 반환
+     */
+    NicknameValidityCheckResponseDto nicknameValidityCheck(String nickname);
 }
