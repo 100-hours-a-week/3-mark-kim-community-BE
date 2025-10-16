@@ -1,8 +1,11 @@
 package kr.adapterz.community.controller;
 
+import kr.adapterz.community.dto.ApiResponseDto;
 import kr.adapterz.community.dto.post.*;
 import kr.adapterz.community.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,8 +21,16 @@ public class PostController {
 
     // 게시글 추가 작업을 처리하는 메서드
     @PostMapping
-    public PostUploadResponseDto uploadPost(@RequestBody PostUploadRequestDto postUploadRequestDto) {
-        return postService.savePost(postUploadRequestDto);
+    public ResponseEntity<ApiResponseDto<PostUploadResponseDto>> uploadPost(@RequestBody PostUploadRequestDto postUploadRequestDto) {
+        PostUploadResponseDto postUploadResponseDto = postService.savePost(postUploadRequestDto);
+
+        ApiResponseDto<PostUploadResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setCode(HttpStatus.OK.value());
+        apiResponseDto.setMessage("The post was uploaded successfully.");
+        apiResponseDto.setPath(String.format("/posts/%s", postUploadResponseDto.getPostId()));
+        apiResponseDto.setData(postUploadResponseDto);
+
+        return ResponseEntity.ok(apiResponseDto);
     }
 
     // 게시글 목록 조회 작업을 처리하는 메서드

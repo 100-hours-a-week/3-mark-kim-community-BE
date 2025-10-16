@@ -70,7 +70,7 @@ public class PostServiceImpl implements PostService {
             }
         }
 
-        return new PostUploadResponseDto(new PostUploadResponseDto.Data(post.getId(), post.getTitle(), post.getCreatedAt()));
+        return new PostUploadResponseDto(post.getId(), post.getTitle(), post.getCreatedAt());
     }
 
     public PostListRetrieveResponseDto getPostList(Long lastFetchId, Integer limit) {

@@ -10,16 +10,10 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @AllArgsConstructor
 public class PostUploadResponseDto {
+    private Long postId;
+    private String title;
 
-    private Data data;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
 
-    @Getter @Setter
-    @AllArgsConstructor
-    public static class Data {
-        private Long postId;
-        private String title;
-
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime createdAt;
-    }
 }
