@@ -1,6 +1,6 @@
 package kr.adapterz.community.repository;
 
-import kr.adapterz.community.dto.UserInfoResponseDto;
+import kr.adapterz.community.dto.user.UserInfoResponseDto;
 import kr.adapterz.community.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

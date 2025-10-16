@@ -1,7 +1,7 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.LoginRequestDto;
-import kr.adapterz.community.dto.LoginResponseDto;
+import kr.adapterz.community.dto.auth.LoginRequestDto;
+import kr.adapterz.community.dto.auth.LoginResponseDto;
 import kr.adapterz.community.entity.UserAuth;
 import kr.adapterz.community.repository.UserAuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;

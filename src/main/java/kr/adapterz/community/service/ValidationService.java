@@ -1,8 +1,8 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.EmailValidityCheckResponseDto;
-import kr.adapterz.community.dto.NicknameValidityCheckResponseDto;
-import kr.adapterz.community.dto.PasswordValidityCheckResponseDto;
+import kr.adapterz.community.dto.validation.EmailValidityCheckResponseDto;
+import kr.adapterz.community.dto.validation.NicknameValidityCheckResponseDto;
+import kr.adapterz.community.dto.validation.PasswordValidityCheckResponseDto;
 
 public interface ValidationService {
     /*

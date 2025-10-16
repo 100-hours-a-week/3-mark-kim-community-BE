@@ -1,7 +1,7 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.LoginRequestDto;
-import kr.adapterz.community.dto.LoginResponseDto;
+import kr.adapterz.community.dto.auth.LoginRequestDto;
+import kr.adapterz.community.dto.auth.LoginResponseDto;
 
 import java.util.Optional;
 

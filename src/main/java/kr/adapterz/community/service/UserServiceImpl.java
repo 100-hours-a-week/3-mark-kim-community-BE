@@ -2,7 +2,9 @@ package kr.adapterz.community.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.auth.UserPwdUpdateRequestDto;
+import kr.adapterz.community.dto.auth.UserPwdUpdateResponseDto;
+import kr.adapterz.community.dto.user.*;
 import kr.adapterz.community.entity.User;
 import kr.adapterz.community.entity.UserAuth;
 import kr.adapterz.community.repository.UserAuthRepository;

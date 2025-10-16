@@ -1,4 +1,4 @@
-package kr.adapterz.community.dto;
+package kr.adapterz.community.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package kr.adapterz.community.controller;
 
-import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.post.*;
 import kr.adapterz.community.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

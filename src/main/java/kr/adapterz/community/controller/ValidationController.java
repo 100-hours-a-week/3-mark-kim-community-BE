@@ -2,6 +2,7 @@ package kr.adapterz.community.controller;
 
 import jakarta.validation.Valid;
 import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.validation.*;
 import kr.adapterz.community.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

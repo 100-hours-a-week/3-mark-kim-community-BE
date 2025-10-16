@@ -1,6 +1,6 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.post.*;
 
 public interface PostService {
 

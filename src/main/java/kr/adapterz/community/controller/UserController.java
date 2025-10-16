@@ -1,6 +1,8 @@
 package kr.adapterz.community.controller;
 
-import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.auth.UserPwdUpdateRequestDto;
+import kr.adapterz.community.dto.auth.UserPwdUpdateResponseDto;
+import kr.adapterz.community.dto.user.*;
 import kr.adapterz.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

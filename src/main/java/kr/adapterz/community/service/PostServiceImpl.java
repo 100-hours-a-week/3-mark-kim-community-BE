@@ -9,7 +9,7 @@ import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.post.*;
 import kr.adapterz.community.entity.*;
 import kr.adapterz.community.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

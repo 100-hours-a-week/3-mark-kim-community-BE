@@ -1,4 +1,4 @@
-package kr.adapterz.community.dto;
+package kr.adapterz.community.dto.validation;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

@@ -1,6 +1,8 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.*;
+import kr.adapterz.community.dto.auth.UserPwdUpdateRequestDto;
+import kr.adapterz.community.dto.auth.UserPwdUpdateResponseDto;
+import kr.adapterz.community.dto.user.*;
 
 public interface UserService {
     /*

@@ -1,4 +1,4 @@
-package kr.adapterz.community.dto;
+package kr.adapterz.community.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
