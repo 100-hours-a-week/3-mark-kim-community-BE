@@ -33,14 +33,18 @@ public class AuthController {
 
         if (loginResponseDtoOpt.isEmpty()) {
             ApiResponseDto<LoginResponseDto> apiResponseDto = new ApiResponseDto<>(
+                    HttpStatus.UNAUTHORIZED.value(),
                     "Login failed",
+                    null,
                     null
             );
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponseDto);
         }
 
         ApiResponseDto<LoginResponseDto> apiResponseDto = new ApiResponseDto<>(
+                HttpStatus.OK.value(),
                 "Login success.",
+                null,
                 loginResponseDtoOpt.get()
         );
 

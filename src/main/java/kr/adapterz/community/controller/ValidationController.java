@@ -5,6 +5,7 @@ import kr.adapterz.community.dto.*;
 import kr.adapterz.community.dto.validation.*;
 import kr.adapterz.community.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,8 @@ public class ValidationController {
                 validationService.emailValidityCheck(emailValidityCheckRequestDto.getEmail());
 
         ApiResponseDto<EmailValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setCode(HttpStatus.OK.value());
+        apiResponseDto.setPath(null);
         apiResponseDto.setData(emailValidityCheckResponseDto);
 
         // 유효성, 중복에 따라 메시지를 다르게 설정
@@ -58,6 +61,8 @@ public class ValidationController {
                 validationService.passwordValidityCheck(passwordValidityCheckRequestDto.getPassword());
 
         ApiResponseDto<PasswordValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setCode(HttpStatus.OK.value());
+        apiResponseDto.setPath(null);
         apiResponseDto.setData(passwordValidityCheckResponseDto);
 
         // 유효성에 따라 메시지를 다르게 설정
@@ -82,6 +87,8 @@ public class ValidationController {
                 validationService.nicknameValidityCheck(nicknameValidityCheckRequestDto.getNickname());
 
         ApiResponseDto<NicknameValidityCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setCode(HttpStatus.OK.value());
+        apiResponseDto.setPath(null);
         apiResponseDto.setData(nicknameValidityCheckResponseDto);
 
         // 유효성에 따라 메시지를 다르게 설정
