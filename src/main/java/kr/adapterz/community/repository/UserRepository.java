@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     // 유저 아이디로 회원정보를 찾고 DTO에 매핑해서 반환 (회원정보 수정 전)
-    @Query("select new kr.adapterz.community.dto.UserInfoResponseDto(ua.email, u.nickname, u.profileImage) " +
+    @Query("select new kr.adapterz.community.dto.user.UserInfoResponseDto(ua.email, u.nickname, u.profileImage) " +
             "from User u join UserAuth ua on u = ua.user " +
             "where u.id = :userId")
     Optional<UserInfoResponseDto> findUserInfoById(Long userId);
