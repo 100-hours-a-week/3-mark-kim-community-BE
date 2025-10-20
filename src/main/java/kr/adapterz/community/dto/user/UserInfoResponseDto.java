@@ -1,0 +1,15 @@
+package kr.adapterz.community.dto.user;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+@AllArgsConstructor
+public class UserInfoResponseDto {
+    private String email;
+    private String nickname;
+    private String profileImage;
+
+    // 추후 data 필드로 분리
+}
