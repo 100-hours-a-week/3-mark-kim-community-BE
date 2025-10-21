@@ -1,8 +1,6 @@
 package kr.adapterz.community.service;
 
-import kr.adapterz.community.dto.validation.EmailValidityCheckResponseDto;
-import kr.adapterz.community.dto.validation.NicknameValidityCheckResponseDto;
-import kr.adapterz.community.dto.validation.PasswordValidityCheckResponseDto;
+import kr.adapterz.community.dto.validation.*;
 import kr.adapterz.community.entity.UserAuth;
 import kr.adapterz.community.repository.UserAuthRepository;
 import kr.adapterz.community.repository.UserRepository;
@@ -60,5 +58,12 @@ public class ValidationServiceImpl implements ValidationService {
         boolean isDuplicated = userRepository.existsByNickname(nickname);
 
         return new NicknameValidityCheckResponseDto(hasSpace, overLimit, isDuplicated);
+    }
+
+    public PasswordDoubleCheckResponseDto passwordDoubleCheck(PasswordDoubleCheckRequestDto passwordDoubleCheckRequestDto) {
+        // 비밀번호 입력값과 재입력한 비밀번호가 일치하는지 확인
+        boolean isEqual = passwordDoubleCheckRequestDto.getPassword().equals(passwordDoubleCheckRequestDto.getPasswordCheck());
+
+        return new PasswordDoubleCheckResponseDto(isEqual);
     }
 }

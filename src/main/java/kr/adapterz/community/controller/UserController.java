@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -26,13 +28,13 @@ public class UserController {
     public ResponseEntity<ApiResponseDto<UserSignUpResponseDto>> register(@RequestBody UserSignUpRequestDto userSignUpRequestDto) {
 
         ApiResponseDto<UserSignUpResponseDto> apiResponseDto = new ApiResponseDto<>(
-                HttpStatus.OK.value(),
+                HttpStatus.CREATED.value(),
                 "Registration completed successfully.",
                 null,
                 userService.saveUser(userSignUpRequestDto)
         );
 
-        return ResponseEntity.ok(apiResponseDto);
+        return ResponseEntity.created(URI.create("/users")).body(apiResponseDto);
     }
 
     // 회원정보 수정 시 필요한 기존 회원정보 요청을 처리하는 메서드
