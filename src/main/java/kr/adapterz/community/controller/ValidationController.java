@@ -107,4 +107,26 @@ public class ValidationController {
 
         return ResponseEntity.ok(apiResponseDto);
     }
+
+    @PostMapping("/password-check")
+    public ResponseEntity<ApiResponseDto<PasswordDoubleCheckResponseDto>> passwordCheck(
+            @RequestBody @Valid PasswordDoubleCheckRequestDto passwordDoubleCheckRequestDto
+    ) {
+        PasswordDoubleCheckResponseDto passwordDoubleCheckResponseDto = validationService.passwordDoubleCheck(passwordDoubleCheckRequestDto);
+        ApiResponseDto<PasswordDoubleCheckResponseDto> apiResponseDto = new ApiResponseDto<>();
+        apiResponseDto.setCode(HttpStatus.OK.value());
+        apiResponseDto.setPath(null);
+        apiResponseDto.setData(passwordDoubleCheckResponseDto);
+
+        String message;
+        if (passwordDoubleCheckResponseDto.getIsEqual()) {
+            message = "Password double check passed.";
+        }
+        else {
+            message = "Password double check failed.";
+        }
+        apiResponseDto.setMessage(message);
+
+        return ResponseEntity.ok(apiResponseDto);
+    }
 }
