@@ -35,10 +35,19 @@ public class PostController {
 
     // 게시글 목록 조회 작업을 처리하는 메서드
     @GetMapping
-    public PostListRetrieveResponseDto retrievePostList(
+    public ResponseEntity<ApiResponseDto<PostListRetrieveResponseDto>> retrievePostList(
             @RequestParam(required = false) Long lastFetchId,
             @RequestParam Integer limit) {
-        return postService.getPostList(lastFetchId, limit);
+        PostListRetrieveResponseDto postListRetrieveResponseDto = postService.getPostList(lastFetchId, limit);
+
+        ApiResponseDto<PostListRetrieveResponseDto> apiResponseDto = new ApiResponseDto<>(
+                HttpStatus.OK.value(),
+                "Posts were retrieved successfully",
+                null,
+                postListRetrieveResponseDto
+        );
+
+        return ResponseEntity.ok(apiResponseDto);
     }
 
     // 게시글 상세 조회 작업을 처리하는 메서드

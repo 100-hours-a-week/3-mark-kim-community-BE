@@ -89,6 +89,7 @@ public class PostServiceImpl implements PostService {
                         PostOneInListDto.class,
                         post.id,
                         user.nickname,
+                        user.profileImage,
                         post.title,
                         postLikeAndCommentCount.likeCount.coalesce(0),
                         postLikeAndCommentCount.commentCount.coalesce(0),
@@ -104,7 +105,7 @@ public class PostServiceImpl implements PostService {
                 .limit(limit)
                 .fetch();
 
-        return new PostListRetrieveResponseDto(new PostListRetrieveResponseDto.Data(posts));
+        return new PostListRetrieveResponseDto(posts);
     }
 
     public PostDetailRetrieveResponseDto getPostDetail(Long postId, Long userId) {
