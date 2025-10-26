@@ -9,4 +9,5 @@ import lombok.Setter;
 public class LoginResponseDto {
     private Long userId;
     private String nickname;
+    private String profileImage;
 }

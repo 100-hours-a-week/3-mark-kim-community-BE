@@ -37,6 +37,6 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // 로그인 성공한 유저의 아이디와 닉네임을 DTO에 매핑
-        return Optional.of(new LoginResponseDto(userAuth.getUserId(), userAuth.getUser().getNickname()));
+        return Optional.of(new LoginResponseDto(userAuth.getUserId(), userAuth.getUser().getNickname(), userAuth.getUser().getProfileImage()));
     }
 }
