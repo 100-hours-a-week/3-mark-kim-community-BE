@@ -9,12 +9,5 @@ import java.util.List;
 @Getter @Setter
 @AllArgsConstructor
 public class PostListRetrieveResponseDto {
-
-    private Data data;
-
-    @Getter @Setter
-    @AllArgsConstructor
-    public static class Data {
-        private List<PostOneInListDto> posts;
-    }
+    private List<PostOneInListDto> posts;
 }

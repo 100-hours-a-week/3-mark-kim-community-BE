@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class PostOneInListDto {
     private Long postId;
     private String userNickname;
+    private String profileImage;
     private String title;
     private Integer likeCount;
     private Integer commentCount;
